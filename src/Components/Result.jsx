@@ -1,64 +1,30 @@
 import React, { useState } from 'react'
 
 const Result=()=> {
-  const [result,setResult]=useState([])
+  const [result,setResult]=useState('')
   const [current_button, setCurrentButton]=useState(0)
-  const[final_res, setFinalRes]=useState();
   function calculate(val){
-    // if(val==="1" || val==="2"|| val==="3" || val==="4" || val==="5" || val==="6"|| val==="7"|| val==="8"|| val==="9"|| val==="0"|| val===".")
-        if(val==="=")
+    // console.log(result);
+    if(val==="=")
                    {                   
-                    setResult([]);         
-                    setCurrentButton();
-                  setFinalRes();}
-                   
-          // parseInt(val)
-          // console.log(result);
-          // if(val==="."){
-          //   // console.log(+".")
-          //   console.log();
-            
-          // }
-          else{
-          
-          setResult([(result[result.length-1])+val]);   
-          // }
-        
-          setResult([...result,val])
-        }   
+                    setResult(eval(result));         
+                    setCurrentButton(0);
+                }
+
     
-    // else{
-    //   setResult(result+val)
-    // }
-    if(result.length%3===0){
-      let temp_result=result[result.length-3];          
-          console.log(result);
+    else{
       
-      switch(result[result.length-2]){
-        case "+" : setResult([Number(temp_result)+Number(result[result.length-1]),val]);
-                   setFinalRes(result);
-                   break;
-        case "-" : setResult([Number(temp_result)-Number(result[result.length-1]),val]);
-                   setFinalRes(result);
-                   break;
-        case "*" : setResult([Number(temp_result)*Number(result[result.length-1]),val]);
-                   setFinalRes(result);
-                   break;
-        case "/" : setResult([Number(temp_result)/Number(result[result.length-1]),val]);
-                   setFinalRes(result);
-                   break;
-        
-      }}
-    
+      setResult(result+val)
+    }
   }
   return (
     <div>
       <div className='calculator_box'>
       <input type='text' 
-      value= {final_res} 
+      value= {result} 
       readOnly/>
       <input type='text' 
-      value={result}
+      value={current_button}
       readOnly/>
       <button onClick={(e)=>{setCurrentButton(e.target.value);calculate(e.target.value)}} value={1}>1</button>
       <button onClick={(e)=>{setCurrentButton(e.target.value);calculate(e.target.value)}} value={2}>2</button>
@@ -76,7 +42,7 @@ const Result=()=> {
       <button onClick={(e)=>{setCurrentButton(e.target.value);calculate(e.target.value)}} value={"."} >.</button>
       <button onClick={(e)=>{setCurrentButton(e.target.value);calculate(e.target.value)}} value={"="} >=</button>
       <button onClick={(e)=>{setCurrentButton(e.target.value);calculate(e.target.value)}} value={"/"} >/</button>
-      <button onClick={()=>{setResult([]); setCurrentButton();setFinalRes(result)}}>C</button>
+      <button onClick={()=>{setResult(''); setCurrentButton(0);}}>C</button>
       </div>
     </div>
   )
